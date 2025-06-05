@@ -3,7 +3,7 @@ import pandas as pd
 from datetime import datetime,timedelta
 from dateutil.relativedelta import relativedelta
 
-# import the csv file to a pandas datafram
+# import the csv file to a pandas dataframe
 df = pd.read_csv('patient_id_month_year.csv')
 
 # convert the month_year field to a datetime and rename
@@ -39,7 +39,7 @@ for patient_id, months in df.groupby('patient_id'):
     for start, end in condensed_months:
         results.append({
             'patient_id': patient_id,
-            'enrollement_start_date': start,
+            'enrollment_start_date': start,
             'enrollment_end_date': (end + relativedelta(months=1) - timedelta(days=1))
         })
 
@@ -49,4 +49,4 @@ final_df = pd.DataFrame(results)
 # create csv output
 final_df.to_csv('patient_enrollment_span.csv', index=False)
 
-print(final_df)
+print(len(final_df))
